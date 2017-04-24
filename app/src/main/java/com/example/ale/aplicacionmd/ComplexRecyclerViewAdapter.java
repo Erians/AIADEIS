@@ -32,7 +32,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public int getItemCount()
     {
-        return this.type;
+        return titles.length;
     }
 
 
@@ -57,21 +57,22 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType)
     {
         RecyclerView.ViewHolder viewHolder;
-        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        //LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
 
         switch (viewType)
         {
             case card:
-                View v1 = inflater.inflate(R.layout.card, viewGroup, false);
+                View v1 = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card, viewGroup, false);
                 viewHolder = new RecyclerAdapter(v1);
                 break;
             case MF:
-                View v2 = inflater.inflate(R.layout.set_mem_flash, viewGroup, false);
+                View v2 = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.set_mem_flash, viewGroup, false);
                 viewHolder = new RecyclerAdapterFM(v2);
                 break;
             default:
-                View v = inflater.inflate(R.layout.card, viewGroup, false);
+                View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card, viewGroup, false);
                 viewHolder = new RecyclerAdapter(v);
+                break;
         }
         return viewHolder;
     }
@@ -99,7 +100,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     private void configureDefaultViewHolder(RecyclerAdapter vh, int position)
     {
-
+        vh.itemTitle.setText(titles[position]);
+        vh.itemImage.setImageResource(images[position]);
     }
 
     private void configureViewHolder1(RecyclerAdapter vh1, int position)
