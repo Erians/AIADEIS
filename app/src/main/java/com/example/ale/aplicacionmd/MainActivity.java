@@ -24,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new RecyclerAdapter();
+
+        adapter = new ComplexRecyclerViewAdapter(1);
         recyclerView.setAdapter(adapter);
     }
 
