@@ -23,6 +23,10 @@
         <activity
             android:name=".flashCardsEditActivity"
             android:label="@string/title_activity_flash_cards_edit" />
+        <activity
+            android:name=".MemoramaActivity"
+            android:label="@string/title_activity_memorama"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
