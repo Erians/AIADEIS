@@ -38,20 +38,14 @@ public class RecyclerAdapter extends RecyclerView.ViewHolder
         */
                 Context context = v.getContext();
                 Intent intentFlashcards = new Intent(context, flashCardsActivity.class);
-<<<<<<< HEAD
-                Intent intentMemorama = new Intent(context, MemoramaActivity.class);
-=======
->>>>>>> origin/master
 
+                Intent intentMemorama = new Intent(context, MemoramaActivity.class);
                 switch (position) {
                     case 0:
                         context.startActivity(intentFlashcards);
                         break;
                     case 1:
-<<<<<<< HEAD
                         context.startActivity(intentMemorama);
-=======
->>>>>>> origin/master
                         break;
                     default:
                 }
