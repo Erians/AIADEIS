@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
-    private final int card = 0, MF=1;
+    private final int card = 0, MF=1, Memo = 2;
     private int type=0;
     private String[] titles = {"Flashcards", "Memorama"};
     private int[] images = {R.drawable.bag_2, R.drawable.bag_1};
@@ -48,6 +48,10 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             if(type == 2)
             {
                 return MF;
+            }else{
+                if (type== 3){
+                    return Memo;
+                }
             }
         }
         return -1;
@@ -69,6 +73,11 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 View v2 = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.set_mem_flash, viewGroup, false);
                 viewHolder = new RecyclerAdapterFM(v2);
                 break;
+            case Memo:
+                // set mem flash cambiar layout
+                View v3 = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.set_mem_flash, viewGroup, false);
+                viewHolder = new RecyclerAdapterFM(v3);
+                break;
             default:
                 View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card, viewGroup, false);
                 viewHolder = new RecyclerAdapter(v);
@@ -89,6 +98,10 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             case MF:
                 RecyclerAdapterFM vh2 = (RecyclerAdapterFM) viewHolder;
                 configureViewHolder2(vh2, position);
+                break;
+            case Memo:
+                RecyclerAdapterFM vh3 = (RecyclerAdapterFM) viewHolder;
+                configureViewHolder3(vh3, position);
                 break;
             default:
                 RecyclerAdapter vh = (RecyclerAdapter) viewHolder;
@@ -114,6 +127,11 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     {
         vh2.itemName.setText(names[position]);
         vh2.itemDesc.setText(description[position]);
+    }
+    private void configureViewHolder3(RecyclerAdapterFM vh3, int position)
+    {
+        vh3.itemName.setText(names[position]);
+        vh3.itemDesc.setText(description[position]);
     }
 
 
