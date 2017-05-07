@@ -27,6 +27,10 @@
             android:name=".MemoramaActivity"
             android:label="@string/title_activity_memorama"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="add_flashcard"
+            android:label= "Añadir Flashcards"/>
+
     </application>
 
 </manifest>

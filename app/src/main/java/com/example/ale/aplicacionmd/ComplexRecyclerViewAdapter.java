@@ -22,6 +22,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private int[] images = {R.drawable.bag_2, R.drawable.bag_1};
     private String[] names = {"Set 1", "Set 2"};
     private String[] description = {"Set 1...desc", "Set 2... desc"};
+    private String[] namesM = {"Set 4", "Set 5"};
+    private String[] descriptionM = {"Set 4...desc", "Set 5... desc"};
 
 
     public ComplexRecyclerViewAdapter(int type)
@@ -130,8 +132,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     }
     private void configureViewHolder3(RecyclerAdapterFM vh3, int position)
     {
-        vh3.itemName.setText(names[position]);
-        vh3.itemDesc.setText(description[position]);
+        vh3.itemName.setText(namesM[position]);
+        vh3.itemDesc.setText(descriptionM[position]);
     }
 
 
