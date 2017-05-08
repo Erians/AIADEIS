@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,11 +26,15 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private String[] namesM = {"Set 4", "Set 5"};
     private String[] descriptionM = {"Set 4...desc", "Set 5... desc"};
     Context context;
+    List <String> tabla1 = new ArrayList<>();
 
 
-    public ComplexRecyclerViewAdapter(int type)
+    public ComplexRecyclerViewAdapter(int type, Context context)
     {
+        FlashcardsDBHelper oo = new FlashcardsDBHelper(context);
+        this.context = context;
         this.type = type;
+        tabla1 = oo.sizeDB();
     }
 
     @Override
@@ -43,7 +48,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         {
             if(type == 2)
             {
-                return 2;
+
+                return tabla1.size();
             }else{
                 if (type== 3){
                     return 2;

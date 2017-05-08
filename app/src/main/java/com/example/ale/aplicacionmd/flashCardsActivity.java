@@ -38,7 +38,7 @@ public class flashCardsActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new ComplexRecyclerViewAdapter(2);
+        adapter = new ComplexRecyclerViewAdapter(2, this);
         adapter.getItemViewType(2);
         recyclerView.setAdapter(adapter);
 

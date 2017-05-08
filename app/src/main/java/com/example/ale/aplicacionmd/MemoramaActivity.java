@@ -30,7 +30,7 @@ public class MemoramaActivity extends AppCompatActivity {
         if(recyclerView1 != null) {
             recyclerView1.setLayoutManager(layoutManager);
         }
-        adapter = new ComplexRecyclerViewAdapter(3);
+        adapter = new ComplexRecyclerViewAdapter(3, this);
         adapter.getItemViewType(3);
         recyclerView1.setAdapter(adapter);
 

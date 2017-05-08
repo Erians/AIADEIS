@@ -10,7 +10,7 @@ public class EsquemaFlashcard
 {
     public static abstract class EntradaFlashcard implements BaseColumns
     {
-        public static final String TABLE_NAME="Flashcards";
+        public static final String TABLE_NAME="flashcard";
 
         public static final String ID = "ID";
         public static final String Nombre = "Nombre";
