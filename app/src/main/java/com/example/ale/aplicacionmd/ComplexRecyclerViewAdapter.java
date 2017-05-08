@@ -21,8 +21,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private int type=0;
     private String[] titles = {"Flashcards", "Memorama"};
     private int[] images = {R.drawable.bag_2, R.drawable.bag_1};
-    private String[] names = {"Set 1", "Set 2"};
-    private String[] description = {"Set 1...desc", "Set 2... desc"};
+    private String[] names = {"Set de prueba"};
+    private String[] description = {"Crea un nuevo set"};
     private String[] namesM = {"Set 4", "Set 5"};
     private String[] descriptionM = {"Set 4...desc", "Set 5... desc"};
     Context context;
@@ -31,10 +31,17 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public ComplexRecyclerViewAdapter(int type, Context context)
     {
-        FlashcardsDBHelper oo = new FlashcardsDBHelper(context);
         this.context = context;
+        FlashcardsDBHelper oo = new FlashcardsDBHelper(context);
         this.type = type;
-        tabla1 = oo.sizeDB();
+        try
+        {
+            tabla1 = oo.sizeDB();
+        }
+        catch (Exception ex)
+        {
+
+        }
     }
 
     @Override
@@ -48,8 +55,14 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         {
             if(type == 2)
             {
-
-                return tabla1.size();
+                if(tabla1.size() == 0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return tabla1.size();
+                }
             }else{
                 if (type== 3){
                     return 2;
@@ -157,8 +170,15 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     {
         FlashcardsDBHelper open = new FlashcardsDBHelper(context);
 
-        vh2.itemName.setText(open.obtenerND(0,position));
-        vh2.itemDesc.setText(open.obtenerND(1,position));
+        try {
+            vh2.itemName.setText(open.obtenerND(0, position));
+            vh2.itemDesc.setText(open.obtenerND(1, position));
+        }catch (Exception ex)
+        {
+            vh2.itemName.setText(names[position]);
+            vh2.itemDesc.setText(description[position]);
+        }
+
     }
     private void configureViewHolder3(RecyclerAdapterFM vh3, int position)
     {

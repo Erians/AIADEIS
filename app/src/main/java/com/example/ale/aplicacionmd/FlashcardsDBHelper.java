@@ -46,6 +46,8 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
         + EsquemaFlashcard.EntradaFlashcard.Lado_1 + " TEXT NOT NULL, "
         + Lado_2 + " TEXT NOT NULL, "
         + " UNIQUE (" + EsquemaFlashcard.EntradaFlashcard.ID + "))");
+
+
     }
 
 
@@ -76,7 +78,6 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
     public String obtenerND (int type, int position)
     {
         SQLiteDatabase db = this.getReadableDatabase();
-
 
         Cursor cursor =
                 db.rawQuery("SELECT * FROM " + EsquemaFlashcard.EntradaFlashcard.TABLE_NAME, null);

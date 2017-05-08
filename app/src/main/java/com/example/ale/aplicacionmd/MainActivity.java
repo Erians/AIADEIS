@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new ComplexRecyclerViewAdapter(1, this);
         recyclerView.setAdapter(adapter);
+
     }
 
 
