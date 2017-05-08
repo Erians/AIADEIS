@@ -24,6 +24,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private String[] description = {"Set 1...desc", "Set 2... desc"};
     private String[] namesM = {"Set 4", "Set 5"};
     private String[] descriptionM = {"Set 4...desc", "Set 5... desc"};
+    Context context;
 
 
     public ComplexRecyclerViewAdapter(int type)
@@ -34,7 +35,25 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public int getItemCount()
     {
-        return titles.length;
+        if (type == 1)
+        {
+            return 2;
+        }
+        else
+        {
+            if(type == 2)
+            {
+                return 2;
+            }else{
+                if (type== 3){
+                    return 2;
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+        }
     }
 
 
@@ -85,6 +104,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 viewHolder = new RecyclerAdapter(v);
                 break;
         }
+        context = viewGroup.getContext();
         return viewHolder;
     }
 
@@ -110,6 +130,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 configureViewHolder1(vh, position);
                 break;
         }
+
+
     }
 
 
@@ -127,8 +149,10 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     private void configureViewHolder2(RecyclerAdapterFM vh2, int position)
     {
-        vh2.itemName.setText(names[position]);
-        vh2.itemDesc.setText(description[position]);
+        FlashcardsDBHelper open = new FlashcardsDBHelper(context);
+
+        vh2.itemName.setText(open.obtenerND(0,position));
+        vh2.itemDesc.setText(open.obtenerND(1,position));
     }
     private void configureViewHolder3(RecyclerAdapterFM vh3, int position)
     {
