@@ -31,13 +31,13 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL("CREATE TABLE" + EsquemaFlashcard.EntradaFlashcard.TABLE_NAME + "("
-        + EsquemaFlashcard.EntradaFlashcard.ID + "INTEGER PRIMARY KEY AUTOINCREMENT,"
-        + EsquemaFlashcard.EntradaFlashcard.Nombre + "TEXT NOT NULL, "
-        + EsquemaFlashcard.EntradaFlashcard.Descripcion + "TEXT NOT NULL,"
-        + EsquemaFlashcard.EntradaFlashcard.Lado_1 + "TEXT NOT NULL,"
-        + Lado_2 + "TEXT NOT NULL,"
-        + "UNIQUE (" + EsquemaFlashcard.EntradaFlashcard.ID + "))");
+        db.execSQL("CREATE TABLE " + EsquemaFlashcard.EntradaFlashcard.TABLE_NAME + " ( "
+        + EsquemaFlashcard.EntradaFlashcard.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+        + EsquemaFlashcard.EntradaFlashcard.Nombre + " TEXT NOT NULL, "
+        + EsquemaFlashcard.EntradaFlashcard.Descripcion + " TEXT NOT NULL, "
+        + EsquemaFlashcard.EntradaFlashcard.Lado_1 + " TEXT NOT NULL, "
+        + Lado_2 + " TEXT NOT NULL, "
+        + " UNIQUE (" + EsquemaFlashcard.EntradaFlashcard.ID + "))");
 
         /*
         ContentValues values = new ContentValues();
@@ -96,7 +96,7 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
     }
 
 
-    public void obtener ()
+    public String obtenerND (int type, int position)
     {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] projection = {EsquemaFlashcard.EntradaFlashcard.Nombre, EsquemaFlashcard.EntradaFlashcard.Descripcion, EsquemaFlashcard.EntradaFlashcard.Lado_1, Lado_2};
@@ -111,18 +111,14 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
         {
             String name = cursor.getString(cursor.getColumnIndex("Nombre"));
             String description = cursor.getString(cursor.getColumnIndex("Descripcion"));
-            String lado1 = cursor.getString(cursor.getColumnIndex("Lado_1"));
-            String lado2 = cursor.getString(cursor.getColumnIndex("Lado_2"));
 
             array[0][i] = name;
             array[1][i] = description;
-            array[2][i] = lado1;
-            array[3][i] = lado2;
 
             i++;
-            Toast toast = Toast.makeText(this, "Buenos dias " , Toast.LENGTH_SHORT);
-            toast.show();
         }
         db.close();
+
+        return array[type][position];
     }
 }

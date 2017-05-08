@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 public class RecyclerAdapterFM extends RecyclerView.ViewHolder
 {
-    private String[] names = {"Set 1", "Set 2"};
-    private String[] description = {"Set 1...desc", "Set 2... desc"};
+    //private String[] names = {"Set 1", "Set 2"};
+    //private String[] description = {"Set 1...desc", "Set 2... desc"};
 
     public int currentItem;
     public TextView itemName;

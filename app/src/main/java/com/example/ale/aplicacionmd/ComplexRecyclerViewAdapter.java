@@ -24,6 +24,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private String[] description = {"Set 1...desc", "Set 2... desc"};
     private String[] namesM = {"Set 4", "Set 5"};
     private String[] descriptionM = {"Set 4...desc", "Set 5... desc"};
+    Context context;
 
 
     public ComplexRecyclerViewAdapter(int type)
@@ -110,6 +111,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 configureViewHolder1(vh, position);
                 break;
         }
+
+
     }
 
 
@@ -127,6 +130,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     private void configureViewHolder2(RecyclerAdapterFM vh2, int position)
     {
+        FlashcardsDBHelper open = new FlashcardsDBHelper(context);
+
         vh2.itemName.setText(names[position]);
         vh2.itemDesc.setText(description[position]);
     }

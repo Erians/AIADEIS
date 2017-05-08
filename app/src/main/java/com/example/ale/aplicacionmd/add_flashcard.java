@@ -49,9 +49,6 @@ public class add_flashcard extends AppCompatActivity
                          String lado2 = lado_2.getText().toString();
 
                          Opener.agregar(message1, message2, lado1, lado2);
-                         Opener.obtener();
-
-                         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                      }
 
                });
