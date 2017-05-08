@@ -15,14 +15,6 @@
     card_view:cardPreventCornerOverlap="false"
     android:clickable="true">
 
-    <!--
-    card_view:contentPadding="4dp"
-    android:layout_marginBottom="30dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:foreground="?attr/selectableItemBackground"-->
-    <!--card_view:cardBackgroundColor="#81c784"-->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
