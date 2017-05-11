@@ -3,6 +3,8 @@ package com.example.ale.aplicacionmd;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -32,19 +34,13 @@ public class flashCardsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-
-
         adapter = new ComplexRecyclerViewAdapter(2, this);
         adapter.getItemViewType(2);
         recyclerView.setAdapter(adapter);
 
-        
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,12 +54,7 @@ public class flashCardsActivity extends AppCompatActivity {
                     el segundo parametro es la actividad que deseas abrir
                     por ultimo en contexto usas el metodo para abrir una activity y pones en el el intent.
 
-
-
-
-
                 */
-
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(flashCardsActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.crear_set_flashcards, null);
 
@@ -81,21 +72,18 @@ public class flashCardsActivity extends AppCompatActivity {
                         if(mNombre.getText().toString().isEmpty())
                         {
                             Toast.makeText(flashCardsActivity.this,
-                                    "Falta definir un nombre para el set de cartas",
-                                    Toast.LENGTH_SHORT).show();
+                                    "Falta definir un nombre para el set de cartas", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                          if(mDescripcion.getText().toString().isEmpty())
                          {
                              Toast.makeText(flashCardsActivity.this,
-                                     "Falta agregar información que describa al set de flashcards",
-                                     Toast.LENGTH_SHORT).show();
+                                     "Falta agregar información que describa al set de flashcards", Toast.LENGTH_SHORT).show();
                          }
                          else
                              {
-                                 //View mView = getLayoutInflater().inflate(R.layout.add_flashcards, null);
-
+                                 //View mView = getLayoutInflater().inflate(R.layout.add_flashcards, null)
                                  String pNombre = mNombre.getText().toString();
                                  String pDescripcion = mDescripcion.getText().toString();
 
@@ -104,8 +92,6 @@ public class flashCardsActivity extends AppCompatActivity {
                                  intent.putExtra("Nombre", pNombre);
                                  intent.putExtra("Descripcion", pDescripcion);
                                  context.startActivity(intent);
-
-
                              }
                         }
 
@@ -118,8 +104,8 @@ public class flashCardsActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu (Menu menu)
@@ -140,6 +126,14 @@ public class flashCardsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClickBotonPlay (View v)
+    {
+        Context context = v.getContext();
+
+        Intent showFCs = new Intent(context, showFlashcards.class);
+        context.startActivity(showFCs);
     }
 
 }

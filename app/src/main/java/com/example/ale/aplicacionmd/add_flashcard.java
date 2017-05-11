@@ -37,7 +37,8 @@ public class add_flashcard extends AppCompatActivity
 
         Button mAceptar = (Button) findViewById(R.id.agregar_flashcard);
 
-        mAceptar.setOnClickListener(new View.OnClickListener() {
+        mAceptar.setOnClickListener(new View.OnClickListener()
+        {
                      @Override
                      public void onClick (View view)
                      {
@@ -50,8 +51,7 @@ public class add_flashcard extends AppCompatActivity
 
                          Opener.agregar(message1, message2, lado1, lado2);
                      }
-
-               });
+        });
 
     }
 }

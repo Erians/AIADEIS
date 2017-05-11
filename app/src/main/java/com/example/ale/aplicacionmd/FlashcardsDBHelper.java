@@ -79,8 +79,7 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
     {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor =
-                db.rawQuery("SELECT * FROM " + EsquemaFlashcard.EntradaFlashcard.TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT Nombre, Descripcion FROM " + EsquemaFlashcard.EntradaFlashcard.TABLE_NAME, null);
 
         String [][] array = new String[4][cursor.getCount()];
         int i=0;
@@ -90,12 +89,28 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
             String name = cursor.getString(cursor.getColumnIndex("Nombre"));
             String description = cursor.getString(cursor.getColumnIndex("Descripcion"));
 
-            array[0][i] = name;
-            array[1][i] = description;
+            int flag = 0;
+            for (int a= 0; a<i;a++)
+            {
+                if (array[0][a].equals(name))
+                {
+                    flag++;
+                }
+            }
 
-            i++;
+            if (flag == 0)
+            {
+                array[0][i] = name;
+                array[1][i] = description;
+                i++;
+            }
+
+
         }
         db.close();
+        cursor.close();
+
+        //i=0;
 
         return array[type][position];
     }
@@ -105,7 +120,7 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
         SQLiteDatabase db = context.openOrCreateDatabase("Flashcards.db", context.MODE_PRIVATE, null);
 
         //Cursor cursor = db.rawQuery("SELECT * FROM " + EsquemaFlashcard.EntradaFlashcard.TABLE_NAME, null);
-        Cursor cursor = db.rawQuery("SELECT * FROM flashcard", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT Nombre FROM flashcard", null);
 
         List<String> tabla = new ArrayList<>();
         int i=0;
@@ -121,6 +136,24 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
         db.close();
 
         return tabla;
+    }
+
+    public int sizeINT(String SetName)
+    {
+        int size=0;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ EsquemaFlashcard.EntradaFlashcard.TABLE_NAME + " WHERE Nombre = '"+SetName+"'", null);
+
+        while (cursor.moveToNext())
+        {
+            String name = cursor.getString(cursor.getColumnIndex("Nombre"));
+
+            size++;
+        }
+        db.close();
+
+        return size;
     }
 
 }

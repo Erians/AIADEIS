@@ -54,7 +54,8 @@
                 android:layout_alignParentRight="true"
                 style="?android:attr/borderlessButtonStyle"
                 android:tint="@color/negro"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:onClick="onClickBotonEdit"/>
 
             <ImageButton
                 android:id="@+id/play_button"
@@ -64,7 +65,8 @@
                 android:layout_toLeftOf="@+id/edit_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:tint="@color/gray"
-                android:layout_marginRight="16dp" />
+                android:layout_marginRight="16dp"
+                android:onClick="onClickBotonPlay"/>
 
             <ImageButton
                 android:id="@+id/erase_button"
@@ -74,7 +76,8 @@
                 android:layout_toLeftOf="@+id/play_button"
                 style="?android:attr/borderlessButtonStyle"
                 android:tint="@color/negro"
-                android:layout_marginRight="16dp"/>
+                android:layout_marginRight="16dp"
+                android:onClick="onClickBotonErase"/>
         </RelativeLayout>
 
 

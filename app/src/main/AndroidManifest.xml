@@ -31,6 +31,8 @@
             android:name="add_flashcard"
             android:label= "Añadir Flashcards"/>
 
+        <activity android:name=".showFlashcards"/>
+
     </application>
 
 </manifest>
