@@ -47,7 +47,17 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
         + Lado_2 + " TEXT NOT NULL, "
         + " UNIQUE (" + EsquemaFlashcard.EntradaFlashcard.ID + "))");
 
-
+        /*
+        db.close();
+        */
+        db.execSQL("CREATE TABLE memorama ( "
+                + EsquemaMemorama.EntradaMemorama.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + EsquemaMemorama.EntradaMemorama.Nombre + " TEXT NOT NULL, "
+                + EsquemaMemorama.EntradaMemorama.Descripcion + " TEXT NOT NULL, "
+                + EsquemaMemorama.EntradaMemorama.Par_1 + " TEXT NOT NULL, "
+                + EsquemaMemorama.EntradaMemorama.Par_2 + " TEXT NOT NULL, "
+                + " UNIQUE (" + EsquemaMemorama.EntradaMemorama.ID + "))");
+        //db.close();
     }
 
 
@@ -75,11 +85,27 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
     }
 
 
-    public String obtenerND (int type, int position)
+    public void agregarMemo (String nombre, String descripcion, String par_1, String par_2)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(EsquemaMemorama.EntradaMemorama.Nombre, nombre);
+        values.put(EsquemaMemorama.EntradaMemorama.Descripcion, descripcion);
+        values.put(EsquemaMemorama.EntradaMemorama.Par_1, par_1);
+        values.put(EsquemaMemorama.EntradaMemorama.Par_2, par_2);
+
+        db.insert("memorama", null, values);
+        db.close();
+    }
+
+
+    public String obtenerND (int type, int position, String NomTabla)
     {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT Nombre, Descripcion FROM " + EsquemaFlashcard.EntradaFlashcard.TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT Nombre, Descripcion FROM " + NomTabla, null);
 
         String [][] array = new String[4][cursor.getCount()];
         int i=0;
@@ -104,23 +130,19 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
                 array[1][i] = description;
                 i++;
             }
-
-
         }
         db.close();
         cursor.close();
-
         //i=0;
-
         return array[type][position];
     }
 
-    public List<String> sizeDB ()
+    public List<String> sizeDB (String NomTabla)
     {
         SQLiteDatabase db = context.openOrCreateDatabase("Flashcards.db", context.MODE_PRIVATE, null);
 
         //Cursor cursor = db.rawQuery("SELECT * FROM " + EsquemaFlashcard.EntradaFlashcard.TABLE_NAME, null);
-        Cursor cursor = db.rawQuery("SELECT DISTINCT Nombre FROM flashcard", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT Nombre FROM " + NomTabla, null);
 
         List<String> tabla = new ArrayList<>();
         int i=0;
@@ -138,12 +160,12 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
         return tabla;
     }
 
-    public int sizeINT(String SetName)
+    public int sizeINT(String SetName, String NomTabla)
     {
         int size=0;
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM "+ EsquemaFlashcard.EntradaFlashcard.TABLE_NAME + " WHERE Nombre = '"+SetName+"'", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ NomTabla + " WHERE Nombre = '"+SetName+"'", null);
 
         while (cursor.moveToNext())
         {
@@ -154,6 +176,59 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
         db.close();
 
         return size;
+    }
+
+
+    public String obtenerLados (int type, int position, String Nombre)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT Lado_1, Lado_2 FROM " + EsquemaFlashcard.EntradaFlashcard.TABLE_NAME + " WHERE Nombre = '" + Nombre + "' ", null);
+
+        String [][] array = new String[4][cursor.getCount()];
+        int i=0;
+
+        while (cursor.moveToNext())
+        {
+            String lado1 = cursor.getString(cursor.getColumnIndex("Lado_1"));
+            String lado2 = cursor.getString(cursor.getColumnIndex("Lado_2"));
+
+
+                array[2][i] = lado1;
+                array[3][i] = lado2;
+                i++;
+
+        }
+        db.close();
+        cursor.close();
+        //i=0;
+        return array[type][position];
+    }
+
+    public String obtenerPares (int type, int position, String Nombre)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT Par_1, Par_2 FROM " + EsquemaMemorama.EntradaMemorama.TABLE_NAME + " WHERE Nombre = '" + Nombre + "' ", null);
+
+        String [][] array = new String[4][cursor.getCount()];
+        int i=0;
+
+        while (cursor.moveToNext())
+        {
+            String par1 = cursor.getString(cursor.getColumnIndex("Par_1"));
+            String par2 = cursor.getString(cursor.getColumnIndex("Par_2"));
+
+
+            array[2][i] = par1;
+            array[3][i] = par2;
+            i++;
+
+        }
+        db.close();
+        cursor.close();
+        //i=0;
+        return array[type][position];
     }
 
 }

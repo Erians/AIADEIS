@@ -33,6 +33,9 @@
 
         <activity android:name=".showFlashcards"/>
 
+        <activity android:name=".add_memorama"
+            android:label="Añadir Juego de cartas de Memorama"/>
+
     </application>
 
 </manifest>

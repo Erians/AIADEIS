@@ -1,8 +1,11 @@
 package com.example.ale.aplicacionmd;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MemoramaActivity extends AppCompatActivity {
 
@@ -37,9 +44,58 @@ public class MemoramaActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View view)
+            {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(MemoramaActivity.this);
+                View mView = getLayoutInflater().inflate(R.layout.crear_set_flashcards, null);
+
+
+                TextView descripcionL = (TextView) mView.findViewById(R.id.etiqueta);
+                descripcionL.setText("Nuevo Set de Memorama");
+
+
+                final EditText mNombre = (EditText) mView.findViewById(R.id.nombre_flashcard);
+                final EditText mDescripcion = (EditText) mView.findViewById(R.id.descripcion_flashcard);
+                Button mAceptar = (Button) mView.findViewById(R.id.aceptar_button);
+
+
+                mAceptar.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick (View view)
+                    {
+                        if(mNombre.getText().toString().isEmpty())
+                        {
+                            Toast.makeText(MemoramaActivity.this,
+                                    "Falta definir un nombre para el set de cartas", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            if(mDescripcion.getText().toString().isEmpty())
+                            {
+                                Toast.makeText(MemoramaActivity.this,
+                                        "Falta agregar información que describa al set de flashcards", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                //View mView = getLayoutInflater().inflate(R.layout.add_flashcards, null)
+                                String pNombre = mNombre.getText().toString();
+                                String pDescripcion = mDescripcion.getText().toString();
+
+                                Context context = view.getContext();
+                                Intent intent = new Intent(context, add_memorama.class);
+                                intent.putExtra("Nombre", pNombre);
+                                intent.putExtra("Descripcion", pDescripcion);
+                                context.startActivity(intent);
+                            }
+                        }
+                    }
+                });
+
+
+                mBuilder.setView(mView);
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
             }
         });
     }

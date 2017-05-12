@@ -3,12 +3,14 @@ package com.example.ale.aplicacionmd;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,14 +22,16 @@ public class RecyclerAdapterFM extends RecyclerView.ViewHolder
     public int currentItem;
     public TextView itemName;
     public TextView itemDesc;
-    public Button itemPlay;
+    public ImageButton play;
+
 
 
     public RecyclerAdapterFM(View itemView) {
         super(itemView);
         itemName = (TextView) itemView.findViewById(R.id.item_name);
         itemDesc = (TextView) itemView.findViewById(R.id.item_desc);
-        //itemPlay = (Button) itemView.findViewById(R.id.play_button);
+        play = (ImageButton) itemView.findViewById(R.id.play_button);
+
 
 
         itemView.setOnClickListener(new View.OnClickListener() {

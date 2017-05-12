@@ -3,24 +3,25 @@ package com.example.ale.aplicacionmd;
 import java.util.UUID;
 
 /**
- * Created by ale_c on 5/5/2017.
+ * Created by ale_c on 5/11/2017.
  */
 
-public class Flashcards
+public class Memorama
+
 {
     private String ID;
     private String Nombre;
     private String Descripcion;
-    private String Lado_1;
-    private String Lado_2;
+    private String Par_1;
+    private String Par_2;
 
-    public Flashcards(String Nombre, String Descripcion, String Lado_1, String Lado_2)
+    public Memorama(String Nombre, String Descripcion, String Par_1, String Par_2)
     {
         this.ID= UUID.randomUUID().toString();
         this.Nombre=Nombre;
         this.Descripcion=Descripcion;
-        this.Lado_1=Lado_1;
-        this.Lado_2=Lado_2;
+        this.Par_1=Par_1;
+        this.Par_2=Par_2;
     }
 
     public String getID()
@@ -37,11 +38,11 @@ public class Flashcards
 
     public String getLado_1()
     {
-        return Lado_1;
+        return Par_1;
     }
 
     public String getLado_2()
     {
-        return Lado_2;
+        return Par_2;
     }
 }

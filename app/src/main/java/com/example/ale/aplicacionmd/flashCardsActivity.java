@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class flashCardsActivity extends AppCompatActivity {
@@ -26,6 +27,10 @@ public class flashCardsActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView.Adapter adapter;
+
+    public String nombreSet;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,10 +135,19 @@ public class flashCardsActivity extends AppCompatActivity {
 
     public void onClickBotonPlay (View v)
     {
+        int position = (int) v.getTag();
+
+        FlashcardsDBHelper oo = new FlashcardsDBHelper(this);
+        String nombre = oo.obtenerND(0, position, EsquemaFlashcard.EntradaFlashcard.TABLE_NAME);
+
+        //String Psrposition = v.getTag().toString();
+        //String pNombre = mNombre.getText().toString();
         Context context = v.getContext();
 
         Intent showFCs = new Intent(context, showFlashcards.class);
+        showFCs.putExtra("Nombre", nombre);
         context.startActivity(showFCs);
+
     }
 
 }

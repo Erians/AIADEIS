@@ -2,6 +2,7 @@ package com.example.ale.aplicacionmd;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -24,50 +25,110 @@ public class showFlashcards extends AppCompatActivity
     public int sizeSet;
     public String texto;
 
+    FlashcardsDBHelper opener = new FlashcardsDBHelper(this);
+
+
+    //final int position = getIntent().getExtras("Nombre");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ind_cards);
 
 
-        FlashcardsDBHelper opener = new FlashcardsDBHelper(this);
 
-        sizeSet=opener.sizeINT("nuevo");
+        final String nombreSet = getIntent().getExtras().getString("Nombre");
+        texto = opener.obtenerLados(cont_type, cont_position, nombreSet);
+        sizeSet=opener.sizeINT(nombreSet, EsquemaFlashcard.EntradaFlashcard.TABLE_NAME);
 
-        texto = opener.obtenerND(cont_type,cont_position);
-        TextView Cadena = (TextView) findViewById(R.id.card_text);
 
-        Cadena.setText(texto);
+
+        itemCardText = (TextView) findViewById(R.id.card_text);
+
+        itemCardText.setText(texto);
+
+
+
+        //Cadena.setText(texto);
 
         //itemCardText = (TextView) findViewById(R.id.card_text);
         //OnSwipeTouchListener MovementsOnScreen = new OnSwipeTouchListener(this);
 
-
         CardView flashcard = (CardView) findViewById(R.id.card_view);
         flashcard.setOnTouchListener(new OnSwipeTouchListener(showFlashcards.this)
         {
+
+            //Izquierda
             public void onSwipeRight()
             {
-                Toast.makeText(showFlashcards.this, "right" + sizeSet, Toast.LENGTH_SHORT).show();
+
+                if (cont_position==0)
+                {
+                    cont_position = sizeSet-1;
+                }
+                else
+                {
+                    cont_position--;
+                }
+
+                texto = opener.obtenerLados(cont_type, cont_position, nombreSet);
+                itemCardText.setText(texto);
+
             }
 
+
+            //Derecha
             public void onSwipeLeft()
             {
-                Toast.makeText(showFlashcards.this, "left", Toast.LENGTH_SHORT).show();
+
+                if (cont_position + 1 == sizeSet)
+                {
+                    cont_position = 0;
+                }
+                else
+                {
+                    cont_position++;
+                }
+
+                texto = opener.obtenerLados(cont_type, cont_position, nombreSet);
+                itemCardText.setText(texto);
+
             }
 
         });
 
+        /*
         flashcard.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
 
+                Snackbar.make(view, "Click detected on item", Snackbar.LENGTH_LONG).show();
+
+                if (cont_type == 2)
+                {
+                    cont_type = 3;
+                    notify();
+                }
+                else
+                {
+                    if (cont_type == 3)
+                    {
+                        cont_type = 2;
+                        notify();
+                    }
+                }
+
             }
 
         });
+        */
+    }
 
+    public void ClickFlashcard (View view)
+    {
+        Snackbar.make(view, "Click detected on item", Snackbar.LENGTH_LONG).show();
     }
 
 }

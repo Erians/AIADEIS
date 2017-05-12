@@ -3,6 +3,7 @@ package com.example.ale.aplicacionmd;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
@@ -27,6 +28,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private String[] descriptionM = {"Set 4...desc", "Set 5... desc"};
     Context context;
     List <String> tabla1 = new ArrayList<>();
+    List <String> tabla2 = new ArrayList<>();
+    public CardView mCardView;
 
 
     public ComplexRecyclerViewAdapter(int type, Context context)
@@ -36,7 +39,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         this.type = type;
         try
         {
-            tabla1 = oo.sizeDB();
+            tabla1 = oo.sizeDB(EsquemaFlashcard.EntradaFlashcard.TABLE_NAME);
+            tabla2 = oo.sizeDB(EsquemaMemorama.EntradaMemorama.TABLE_NAME);
         }
         catch (Exception ex)
         {
@@ -65,7 +69,14 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 }
             }else{
                 if (type== 3){
-                    return 2;
+                    if(tabla2.size() == 0)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return tabla2.size();
+                    }
                 }
                 else
                 {
@@ -111,6 +122,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 break;
             case MF:
                 View v2 = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.set_mem_flash, viewGroup, false);
+                mCardView = (CardView) v2.findViewById(R.id.card_view);
                 viewHolder = new RecyclerAdapterFM(v2);
                 break;
             case Memo:
@@ -168,22 +180,36 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     private void configureViewHolder2(RecyclerAdapterFM vh2, int position)
     {
+
+
         FlashcardsDBHelper open = new FlashcardsDBHelper(context);
 
         try {
-            vh2.itemName.setText(open.obtenerND(0, position));
-            vh2.itemDesc.setText(open.obtenerND(1, position));
+            vh2.itemName.setText(open.obtenerND(0, position, EsquemaFlashcard.EntradaFlashcard.TABLE_NAME));
+            vh2.itemDesc.setText(open.obtenerND(1, position, EsquemaFlashcard.EntradaFlashcard.TABLE_NAME));
+            vh2.play.setTag(position);
         }catch (Exception ex)
         {
             vh2.itemName.setText(names[position]);
             vh2.itemDesc.setText(description[position]);
+            vh2.play.setTag(position);
         }
 
     }
     private void configureViewHolder3(RecyclerAdapterFM vh3, int position)
     {
-        vh3.itemName.setText(namesM[position]);
-        vh3.itemDesc.setText(descriptionM[position]);
+        FlashcardsDBHelper open = new FlashcardsDBHelper(context);
+
+        try {
+            vh3.itemName.setText(open.obtenerND(0, position, EsquemaMemorama.EntradaMemorama.TABLE_NAME));
+            vh3.itemDesc.setText(open.obtenerND(1, position, EsquemaMemorama.EntradaMemorama.TABLE_NAME));
+            vh3.play.setTag(position);
+        }catch (Exception ex)
+        {
+            vh3.itemName.setText(namesM[position]);
+            vh3.itemDesc.setText(descriptionM[position]);
+            vh3.play.setTag(position);
+        }
     }
 
 

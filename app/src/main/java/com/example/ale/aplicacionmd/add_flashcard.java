@@ -10,16 +10,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-
-
-
 public class add_flashcard extends AppCompatActivity
 {
-
-
-
-    //private TextView mNombreContent;
-    //private TextView mDescripcionContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
