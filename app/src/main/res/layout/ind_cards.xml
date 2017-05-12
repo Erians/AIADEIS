@@ -12,7 +12,9 @@
     card_view:cardCornerRadius="2dp"
     card_view:cardPreventCornerOverlap="false"
     android:clickable="true"
-    android:onClick="ClickFlashcard">
+    android:onClick="animateIntent"
+    android:transitionName="@string/transition_string"
+    android:backgroundTint="@color/gray">
 
 
 
