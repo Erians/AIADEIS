@@ -31,12 +31,16 @@
             android:name="add_flashcard"
             android:label= "Añadir Flashcards"/>
 
-        <activity android:name=".showFlashcards"/>
+        <activity android:name=".showFlashcards"
+            android:label="Flashcards"/>
 
         <activity android:name=".add_memorama"
             android:label="Añadir Juego de cartas de Memorama"/>
 
         <activity android:name=".textFrontSideFC"/>
+
+        <activity android:name=".showMemorama"
+            android:label="Memorama"/>
 
     </application>
 

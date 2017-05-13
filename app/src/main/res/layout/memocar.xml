@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:card_view="http://schemas.android.com/apk/res-auto"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/carta"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_gravity="center"
+card_view:cardElevation="25dp"
+card_view:cardUseCompatPadding="true"
+card_view:cardCornerRadius="2dp"
+card_view:cardPreventCornerOverlap="false"
+android:clickable="true"
+android:transitionName="@string/transition_string"
+    android:onClick="onClickCarta">
+
+<ImageView
+    android:id="@+id/tile_picture"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tile_height"
+    android:scaleType="centerCrop"
+    tools:src="@drawable/backcard" />
+
+
+
+
+<ImageView
+    android:id="@+id/tile_change"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tile_height"
+    android:alpha="1"
+    android:background="@color/transparente_negro"
+    android:visibility="invisible"/>
+
+<TextView
+    android:id="@+id/tile_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:text=" "
+    android:textStyle="bold"
+    android:textColor="@color/white"
+    android:textSize="20dp"
+    android:visibility="invisible"/>
+
+</android.support.v7.widget.CardView>

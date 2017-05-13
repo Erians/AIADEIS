@@ -174,6 +174,7 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
             size++;
         }
         db.close();
+        cursor.close();
 
         return size;
     }
@@ -205,30 +206,92 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
         return array[type][position];
     }
 
-    public String obtenerPares (int type, int position, String Nombre)
+    public String obtenerPares (int position, String Nombre, String NomTabla)
     {
+        int size=0;
         SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT Par_1, Par_2 FROM " + EsquemaMemorama.EntradaMemorama.TABLE_NAME + " WHERE Nombre = '" + Nombre + "' ", null);
-
-        String [][] array = new String[4][cursor.getCount()];
-        int i=0;
-
+        Cursor cursor = db.rawQuery("SELECT * FROM "+ NomTabla + " WHERE Nombre = '"+Nombre+"'", null);
+        int sizeArray = 2 * cursor.getCount();
+        String [][] array = new String[2 * cursor.getCount()][2];
+        String [][] secondArray = new String[2 * cursor.getCount()][2];
         while (cursor.moveToNext())
         {
-            String par1 = cursor.getString(cursor.getColumnIndex("Par_1"));
-            String par2 = cursor.getString(cursor.getColumnIndex("Par_2"));
-
-
-            array[2][i] = par1;
-            array[3][i] = par2;
-            i++;
-
+            String name = cursor.getString(cursor.getColumnIndex("Par_1"));
+            String name2 = cursor.getString(cursor.getColumnIndex("Par_2"));
+            array[size][0]=name;
+            array[sizeArray - size -1][0]=name2;
+            size++;
         }
         db.close();
         cursor.close();
-        //i=0;
-        return array[type][position];
+
+        int cont=0;
+        for (int a=0;a<sizeArray;a=a+2)
+        {
+            if(cont%2 == 0)
+            {
+                secondArray[sizeArray-cont-1][0]=array[a][0];
+                secondArray[cont][0] = array[a+1][0];
+            }
+            else {
+                if (cont % 2 != 0) {
+                    secondArray[sizeArray - cont - 1][0] = array[a + 1][0];
+                    secondArray[cont][0] = array[a][0];
+                }
+            }
+            cont++;
+        }
+        return secondArray[position][0];
     }
 
+
+    public String determinarPareja (String par, String SetMem)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM memorama WHERE Nombre = '"+SetMem+"'", null);
+        int sizeArray = cursor.getCount();
+        int size=0;
+        int value1send=0;
+        int value2send=0;
+        String [][] array = new String[cursor.getCount()][2];
+
+        while (cursor.moveToNext())
+        {
+            String name = cursor.getString(cursor.getColumnIndex("Par_1"));
+            String name2 = cursor.getString(cursor.getColumnIndex("Par_2"));
+            array[size][0]=name;
+            array[size][1]=name2;
+            size++;
+        }
+        db.close();
+        cursor.close();
+
+
+        for (int a=0;a<sizeArray;a++)
+        {
+            if(par.equals(array[a][0]))
+            {
+                value1send = a;
+                value2send = 1;
+            }
+            else {
+                if (par.equals(array[a][1])) {
+                    value1send = a;
+                    value2send = 0;
+                }
+            }
+        }
+        return array[value1send][value2send];
+    }
+
+
+    public String determinarOtroLado (String par, String SetName)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM memorama WHERE Nombre = '" + SetName + "'", null);
+
+        return "Hola";
+    }
 }

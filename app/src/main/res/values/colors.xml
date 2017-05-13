@@ -5,10 +5,12 @@
     <color name="colorAccent">#00cab3</color>
     <color name="gray">#5b5b5b</color>
     <color name="transparente_negro">#85191919</color>
+    <color name="transparente_negro_mas">#85ffffff</color>
     <color name="transparente_claro">#ffe3e3e3</color>
     <color name="gris">#e8e8e8</color>
     <color name="negro">#000000</color>
     <color name="white">#ecebeb</color>
     <color name="white_other">#dfdfdf</color>
     <color name="gray_other">#d8d8d8</color>
+    <color name="amber">#ffc107</color>
 </resources>

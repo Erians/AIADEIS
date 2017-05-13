@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
-    private final int card = 0, MF=1, Memo = 2;
+    private final int card = 0, MF=1, Memo = 2, showMemo = 3;
     private int type=0;
     private String[] titles = {"Flashcards", "Memorama"};
     private int[] images = {R.drawable.bag_2, R.drawable.bag_1};
@@ -26,10 +26,14 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private String[] description = {"Crea un nuevo set"};
     private String[] namesM = {"Set 4", "Set 5"};
     private String[] descriptionM = {"Set 4...desc", "Set 5... desc"};
+    private int[] imagesMemo = {R.drawable.backcard};
+
     Context context;
     List <String> tabla1 = new ArrayList<>();
     List <String> tabla2 = new ArrayList<>();
     public CardView mCardView;
+    String NJuego;
+    int size;
 
 
     public ComplexRecyclerViewAdapter(int type, Context context)
@@ -46,6 +50,16 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
         {
 
         }
+    }
+
+    public ComplexRecyclerViewAdapter (int type, Context context, String NJuego)
+    {
+        FlashcardsDBHelper oo = new FlashcardsDBHelper(context);
+        this.type = type;
+        this.context = context;
+        this.NJuego = NJuego;
+        size = oo.sizeINT(NJuego, EsquemaMemorama.EntradaMemorama.TABLE_NAME);
+
     }
 
     @Override
@@ -80,7 +94,14 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 }
                 else
                 {
-                    return 2;
+                    if(type == 4)
+                    {
+                        return 2*size;
+                    }
+                    else
+                    {
+                        return 2;
+                    }
                 }
             }
         }
@@ -102,6 +123,12 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             }else{
                 if (type== 3){
                     return Memo;
+                }else
+                {
+                    if(type == 4)
+                    {
+                        return showMemo;
+                    }
                 }
             }
         }
@@ -130,6 +157,10 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
                 View v3 = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.set_mem_flash, viewGroup, false);
                 viewHolder = new RecyclerAdapterFM(v3);
                 break;
+            case showMemo:
+                View v4 = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.memocar, viewGroup, false);
+                viewHolder = new RecyclerAdapterMemo(v4, NJuego);
+                break;
             default:
                 View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card, viewGroup, false);
                 viewHolder = new RecyclerAdapter(v);
@@ -155,6 +186,10 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             case Memo:
                 RecyclerAdapterFM vh3 = (RecyclerAdapterFM) viewHolder;
                 configureViewHolder3(vh3, position);
+                break;
+            case showMemo:
+                RecyclerAdapterMemo vh4 = (RecyclerAdapterMemo) viewHolder;
+                configureViewHolder4(vh4, position);
                 break;
             default:
                 RecyclerAdapter vh = (RecyclerAdapter) viewHolder;
@@ -213,4 +248,25 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
 
+    private void configureViewHolder4(RecyclerAdapterMemo vh4, int position)
+    {
+        FlashcardsDBHelper open = new FlashcardsDBHelper(context);
+
+        try {
+            vh4.itemImage.setImageResource(imagesMemo[0]);
+            vh4.itemTitle.setText(open.obtenerPares(position, NJuego, EsquemaMemorama.EntradaMemorama.TABLE_NAME));
+            vh4.itemTitle.setTag(position);
+            vh4.Carta.setTag(position);
+            vh4.itemChange.setTag(position);
+            vh4.itemImage.setTag(position);
+            vh4.itemTitle.setTag(position);
+            //vh4.itemDesc.setText(open.obtenerND(1, position, EsquemaMemorama.EntradaMemorama.TABLE_NAME));
+            //vh4.play.setTag(position);
+        }catch (Exception ex)
+        {
+            //vh4.itemName.setText(namesM[position]);
+            //vh4.itemDesc.setText(descriptionM[position]);
+            //vh4.play.setTag(position);
+        }
+    }
 }

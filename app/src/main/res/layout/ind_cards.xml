@@ -14,7 +14,7 @@
     android:clickable="true"
     android:onClick="animateIntent"
     android:transitionName="@string/transition_string"
-    android:backgroundTint="@color/gray">
+    android:backgroundTint="@color/amber">
 
 
 
@@ -26,7 +26,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="90dp"
             android:text=" "
-            android:textColor="@color/gray"
+            android:textColor="@color/negro"
             android:textSize="30sp"
             android:textStyle="bold"
             android:gravity="center"/>

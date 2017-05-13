@@ -120,4 +120,21 @@ public class MemoramaActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void onClickBotonPlay (View v)
+    {
+        int position = (int) v.getTag();
+
+        FlashcardsDBHelper oo = new FlashcardsDBHelper(this);
+        String nombre = oo.obtenerND(0, position, EsquemaMemorama.EntradaMemorama.TABLE_NAME);
+
+        //String Psrposition = v.getTag().toString();
+        //String pNombre = mNombre.getText().toString();
+        Context context = v.getContext();
+
+        Intent showMem = new Intent(context, showMemorama.class);
+        showMem.putExtra("Nombre", nombre);
+        context.startActivity(showMem);
+
+    }
 }
