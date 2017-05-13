@@ -1,10 +1,12 @@
 package com.example.ale.aplicacionmd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by ale_c on 5/11/2017.
@@ -35,6 +37,7 @@ public class add_memorama extends AppCompatActivity
         agregarB.setText("Terminar Juego de Cartas");
 
         Button mAceptar = (Button) findViewById(R.id.agregar_flashcard);
+        Button TerminarSet = (Button) findViewById(R.id.terminar_set);
 
         mAceptar.setOnClickListener(new View.OnClickListener()
         {
@@ -48,7 +51,35 @@ public class add_memorama extends AppCompatActivity
                 TextView lado_2 = (TextView) findViewById(R.id.lado_2_cont);
                 String lado2 = lado_2.getText().toString();
 
+                if (lado_1.getText().toString().isEmpty())
+                {
+                    Toast.makeText(add_memorama.this,"Falta agregar el contenido del par 1", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    if(lado_2.getText().toString().isEmpty())
+                    {
+                        Toast.makeText(add_memorama.this,"Falta agregar el contenido del par 2", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Opener.agregar(message1, message2, lado1, lado2);
+                        Toast.makeText(add_memorama.this,"Se han agregado los datos con éxito", Toast.LENGTH_SHORT).show();
+                        lado_1.setText("");
+                        lado_2.setText("");
+                    }
+                }
                 Opener.agregarMemo(message1, message2, lado1, lado2);
+            }
+        });
+
+        TerminarSet.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick (View view)
+            {
+                Intent intent = new Intent(getApplicationContext(), MemoramaActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
     }

@@ -24,8 +24,8 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private int[] images = {R.drawable.bag_2, R.drawable.bag_1};
     private String[] names = {"Set de prueba"};
     private String[] description = {"Crea un nuevo set"};
-    private String[] namesM = {"Set 4", "Set 5"};
-    private String[] descriptionM = {"Set 4...desc", "Set 5... desc"};
+    private String[] namesM = {"Set de prueba", "Set 5"};
+    private String[] descriptionM = {"Crea uno nuevo", "Set 5... desc"};
     private int[] imagesMemo = {R.drawable.backcard};
 
     Context context;
@@ -223,11 +223,13 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             vh2.itemName.setText(open.obtenerND(0, position, EsquemaFlashcard.EntradaFlashcard.TABLE_NAME));
             vh2.itemDesc.setText(open.obtenerND(1, position, EsquemaFlashcard.EntradaFlashcard.TABLE_NAME));
             vh2.play.setTag(position);
+            vh2.play.setVisibility(View.VISIBLE);
         }catch (Exception ex)
         {
             vh2.itemName.setText(names[position]);
             vh2.itemDesc.setText(description[position]);
             vh2.play.setTag(position);
+            vh2.play.setVisibility(View.INVISIBLE);
         }
 
     }
@@ -239,11 +241,13 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             vh3.itemName.setText(open.obtenerND(0, position, EsquemaMemorama.EntradaMemorama.TABLE_NAME));
             vh3.itemDesc.setText(open.obtenerND(1, position, EsquemaMemorama.EntradaMemorama.TABLE_NAME));
             vh3.play.setTag(position);
+            vh3.play.setVisibility(View.VISIBLE);
         }catch (Exception ex)
         {
             vh3.itemName.setText(namesM[position]);
             vh3.itemDesc.setText(descriptionM[position]);
             vh3.play.setTag(position);
+            vh3.play.setVisibility(View.INVISIBLE);
         }
     }
 
