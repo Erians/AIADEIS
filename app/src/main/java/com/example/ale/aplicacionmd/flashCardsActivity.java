@@ -61,13 +61,16 @@ public class flashCardsActivity extends AppCompatActivity {
 
                 */
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(flashCardsActivity.this);
-                View mView = getLayoutInflater().inflate(R.layout.crear_set_flashcards, null);
+                final View mView = getLayoutInflater().inflate(R.layout.crear_set_flashcards, null);
 
                 final EditText mNombre = (EditText) mView.findViewById(R.id.nombre_flashcard);
                 final EditText mDescripcion = (EditText) mView.findViewById(R.id.descripcion_flashcard);
                 Button mAceptar = (Button) mView.findViewById(R.id.aceptar_button);
 
 
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
                 mAceptar.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
@@ -88,6 +91,8 @@ public class flashCardsActivity extends AppCompatActivity {
                          }
                          else
                              {
+
+                                 dialog.dismiss();
                                  //View mView = getLayoutInflater().inflate(R.layout.add_flashcards, null)
                                  String pNombre = mNombre.getText().toString();
                                  String pDescripcion = mDescripcion.getText().toString();
@@ -104,9 +109,12 @@ public class flashCardsActivity extends AppCompatActivity {
                     }
                 });
 
+
+                /*
                 mBuilder.setView(mView);
                 AlertDialog dialog = mBuilder.create();
                 dialog.show();
+                */
             }
         });
     }
@@ -147,6 +155,53 @@ public class flashCardsActivity extends AppCompatActivity {
         Intent showFCs = new Intent(context, showFlashcards.class);
         showFCs.putExtra("Nombre", nombre);
         context.startActivity(showFCs);
+
+    }
+
+    public void onClickBotonErase (View v)
+    {
+        int position = (int) v.getTag();
+        final FlashcardsDBHelper oo = new FlashcardsDBHelper(this);
+        final String nombre = oo.obtenerND(0, position, EsquemaFlashcard.EntradaFlashcard.TABLE_NAME);
+
+        //Toast.makeText(this, position + " " + nombre, Toast.LENGTH_SHORT).show();
+
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(flashCardsActivity.this);
+
+        final View mView = getLayoutInflater().inflate(R.layout.borrar_set, null);
+        //final TextView Texto = (TextView) findViewById(R.id.aviso_cont);
+        //Texto.setText("jsjsjsjsjsjjs");
+
+
+        Button mSi = (Button) mView.findViewById(R.id.si_button);
+        Button mNo = (Button) mView.findViewById(R.id.no_button);
+
+
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        mSi.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View view)
+            {
+                oo.ejecutarComando(EsquemaFlashcard.EntradaFlashcard.TABLE_NAME, nombre);
+                dialog.dismiss();
+                Toast.makeText(flashCardsActivity.this, "El Set ha sido eliminado", Toast.LENGTH_SHORT).show();
+                recreate();
+            }
+        });
+
+        mNo.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View view)
+            {
+                dialog.dismiss();
+            }
+        });
 
     }
 

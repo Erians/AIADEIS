@@ -23,6 +23,7 @@ public class RecyclerAdapterFM extends RecyclerView.ViewHolder
     public TextView itemName;
     public TextView itemDesc;
     public ImageButton play;
+    public ImageButton delete;
 
 
 
@@ -31,6 +32,7 @@ public class RecyclerAdapterFM extends RecyclerView.ViewHolder
         itemName = (TextView) itemView.findViewById(R.id.item_name);
         itemDesc = (TextView) itemView.findViewById(R.id.item_desc);
         play = (ImageButton) itemView.findViewById(R.id.play_button);
+        delete = (ImageButton) itemView.findViewById(R.id.erase_button);
 
 
 

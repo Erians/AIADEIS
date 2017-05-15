@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.media.audiofx.AudioEffect;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -286,12 +287,13 @@ public class FlashcardsDBHelper extends SQLiteOpenHelper
     }
 
 
-    public String determinarOtroLado (String par, String SetName)
+    public void ejecutarComando (String SetName, String TableName)
     {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM memorama WHERE Nombre = '" + SetName + "'", null);
+        //SQLiteDatabase db = this.getReadableDatabase();
 
-        return "Hola";
+        db.execSQL("DELETE FROM "+ SetName +" WHERE Nombre = '" + TableName + "'");
+        db.close();
     }
 }

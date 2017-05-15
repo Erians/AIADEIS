@@ -224,12 +224,15 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             vh2.itemDesc.setText(open.obtenerND(1, position, EsquemaFlashcard.EntradaFlashcard.TABLE_NAME));
             vh2.play.setTag(position);
             vh2.play.setVisibility(View.VISIBLE);
+            vh2.delete.setTag(position);
+            vh2.delete.setVisibility(View.VISIBLE);
         }catch (Exception ex)
         {
             vh2.itemName.setText(names[position]);
             vh2.itemDesc.setText(description[position]);
             vh2.play.setTag(position);
             vh2.play.setVisibility(View.INVISIBLE);
+            vh2.delete.setVisibility(View.INVISIBLE);
         }
 
     }
@@ -242,12 +245,15 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             vh3.itemDesc.setText(open.obtenerND(1, position, EsquemaMemorama.EntradaMemorama.TABLE_NAME));
             vh3.play.setTag(position);
             vh3.play.setVisibility(View.VISIBLE);
+            vh3.delete.setTag(position);
+            vh3.delete.setVisibility(View.VISIBLE);
         }catch (Exception ex)
         {
             vh3.itemName.setText(namesM[position]);
             vh3.itemDesc.setText(descriptionM[position]);
             vh3.play.setTag(position);
             vh3.play.setVisibility(View.INVISIBLE);
+            vh3.delete.setVisibility(View.INVISIBLE);
         }
     }
 

@@ -48,17 +48,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true">
 
-            <ImageButton
-                android:id="@+id/edit_button"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:onClick="onClickBotonEdit"
-                android:tint="@color/negro"
-                app:srcCompat="@android:drawable/ic_menu_edit"
-                android:visibility="invisible"/>
 
             <ImageButton
                 android:id="@+id/play_button"
@@ -66,7 +55,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="16dp"
-                android:layout_toLeftOf="@+id/edit_button"
+                android:layout_alignParentRight="true"
                 android:onClick="onClickBotonPlay"
                 android:tint="@color/gray"
                 app:srcCompat="@android:drawable/ic_media_play" />
@@ -81,7 +70,25 @@
                 android:onClick="onClickBotonErase"
                 android:tint="@color/negro"
                 app:srcCompat="@android:drawable/ic_menu_delete"
+                android:visibility="visible"/>
+
+
+
+
+
+            <ImageButton
+                android:id="@+id/edit_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_toLeftOf="@+id/erase_button"
+                android:layout_marginRight="10dp"
+                android:onClick="onClickBotonEdit"
+                android:tint="@color/negro"
+                app:srcCompat="@android:drawable/ic_menu_edit"
                 android:visibility="invisible"/>
+
+
         </RelativeLayout>
 
 

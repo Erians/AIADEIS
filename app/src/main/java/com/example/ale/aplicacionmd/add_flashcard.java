@@ -3,6 +3,7 @@ package com.example.ale.aplicacionmd;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -75,6 +76,40 @@ public class add_flashcard extends AppCompatActivity
                 Intent intent = new Intent(getApplicationContext(), flashCardsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        AlertDialog.Builder alertaRegresar = new AlertDialog.Builder(add_flashcard.this);
+        View mView = getLayoutInflater().inflate(R.layout.back_button_pressed, null);
+        Button mAceptar = (Button) mView.findViewById(R.id.si_button);
+        Button mCancelar = (Button) mView.findViewById(R.id.no_button);
+        alertaRegresar.setView(mView);
+        final AlertDialog dialog = alertaRegresar.create();
+        dialog.show();
+
+        mAceptar.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View view)
+            {
+                dialog.dismiss();
+                Context context = view.getContext();
+                Intent getBack = new Intent(context, flashCardsActivity.class);
+                context.startActivity(getBack);
+            }
+        });
+
+        mCancelar.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View view)
+            {
+                dialog.dismiss();
             }
         });
 

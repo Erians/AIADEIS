@@ -59,6 +59,10 @@ public class MemoramaActivity extends AppCompatActivity {
                 Button mAceptar = (Button) mView.findViewById(R.id.aceptar_button);
 
 
+                mBuilder.setView(mView);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+
                 mAceptar.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
@@ -78,6 +82,7 @@ public class MemoramaActivity extends AppCompatActivity {
                             }
                             else
                             {
+                                dialog.dismiss();
                                 //View mView = getLayoutInflater().inflate(R.layout.add_flashcards, null)
                                 String pNombre = mNombre.getText().toString();
                                 String pDescripcion = mDescripcion.getText().toString();
@@ -91,11 +96,6 @@ public class MemoramaActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
-                mBuilder.setView(mView);
-                AlertDialog dialog = mBuilder.create();
-                dialog.show();
             }
         });
     }
@@ -135,6 +135,47 @@ public class MemoramaActivity extends AppCompatActivity {
         Intent showMem = new Intent(context, showMemorama.class);
         showMem.putExtra("Nombre", nombre);
         context.startActivity(showMem);
+
+    }
+
+    public void onClickBotonErase (View v)
+    {
+        int position = (int) v.getTag();
+        final FlashcardsDBHelper oo = new FlashcardsDBHelper(this);
+        final String nombre = oo.obtenerND(0, position, EsquemaMemorama.EntradaMemorama.TABLE_NAME);
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder( MemoramaActivity.this );
+
+        final View mView = getLayoutInflater().inflate(R.layout.borrar_set, null);
+
+        Button mSi = (Button) mView.findViewById(R.id.si_button);
+        Button mNo = (Button) mView.findViewById(R.id.no_button);
+
+
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        mSi.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View view)
+            {
+                oo.ejecutarComando(EsquemaMemorama.EntradaMemorama.TABLE_NAME, nombre);
+                dialog.dismiss();
+                Toast.makeText(MemoramaActivity.this, "El Set ha sido eliminado", Toast.LENGTH_SHORT).show();
+                recreate();
+            }
+        });
+
+        mNo.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick (View view)
+            {
+                dialog.dismiss();
+            }
+        });
 
     }
 }
