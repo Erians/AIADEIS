@@ -84,34 +84,34 @@ public class add_flashcard extends AppCompatActivity
     @Override
     public void onBackPressed()
     {
-        AlertDialog.Builder alertaRegresar = new AlertDialog.Builder(add_flashcard.this);
-        View mView = getLayoutInflater().inflate(R.layout.back_button_pressed, null);
-        Button mAceptar = (Button) mView.findViewById(R.id.si_button);
-        Button mCancelar = (Button) mView.findViewById(R.id.no_button);
-        alertaRegresar.setView(mView);
-        final AlertDialog dialog = alertaRegresar.create();
-        dialog.show();
-
-        mAceptar.setOnClickListener(new View.OnClickListener()
+        /*
+        if(getApplicationContext() == view.getContext())
         {
-            @Override
-            public void onClick (View view)
-            {
-                dialog.dismiss();
-                Context context = view.getContext();
-                Intent getBack = new Intent(context, flashCardsActivity.class);
-                context.startActivity(getBack);
-            }
-        });
+*/
+            AlertDialog.Builder alertaRegresar = new AlertDialog.Builder(add_flashcard.this);
+            View mView = getLayoutInflater().inflate(R.layout.back_button_pressed, null);
+            Button mAceptar = (Button) mView.findViewById(R.id.si_button);
+            Button mCancelar = (Button) mView.findViewById(R.id.no_button);
+            alertaRegresar.setView(mView);
+            final AlertDialog dialog = alertaRegresar.create();
+            dialog.show();
 
-        mCancelar.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick (View view)
-            {
-                dialog.dismiss();
-            }
-        });
+            mAceptar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    Context context = view.getContext();
+                    Intent getBack = new Intent(context, flashCardsActivity.class);
+                    context.startActivity(getBack);
+                }
+            });
+
+            mCancelar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                }
+            });
 
     }
 }

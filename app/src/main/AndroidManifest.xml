@@ -37,8 +37,6 @@
         <activity android:name=".add_memorama"
             android:label="Añadir Juego de cartas de Memorama"/>
 
-        <activity android:name=".textFrontSideFC"/>
-
         <activity android:name=".showMemorama"
             android:label="Memorama"/>
 

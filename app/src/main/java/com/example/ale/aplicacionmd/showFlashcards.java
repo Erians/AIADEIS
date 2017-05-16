@@ -175,5 +175,12 @@ public class showFlashcards extends AppCompatActivity implements Animation.Anima
             //Toast.makeText(getApplicationContext(), "Animation hello", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent getBack = new Intent(showFlashcards.this, flashCardsActivity.class);
+        showFlashcards.this.startActivity(getBack);
+    }
 }
 

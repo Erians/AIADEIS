@@ -25,6 +25,8 @@ public class add_memorama extends AppCompatActivity
         TextView mNombreContent= (TextView) findViewById(R.id.nombre_set_cont);
         TextView mDescripcionContent = (TextView) findViewById(R.id.descripcion_set_cont);
         TextView tflashcard = (TextView) findViewById(R.id.flashcard);
+        TextView par1 = (TextView) findViewById(R.id.lado_1);
+        TextView par2 = (TextView) findViewById(R.id.lado_2);
         Button tagregarFC = (Button) findViewById(R.id.agregar_flashcard);
         Button agregarB = (Button) findViewById(R.id.terminar_set);
 
@@ -37,6 +39,8 @@ public class add_memorama extends AppCompatActivity
         tflashcard.setText("Memorama");
         tagregarFC.setText("Agregar Par de Cartas");
         agregarB.setText("Terminar Juego de Cartas");
+        par1.setText("Texto de Par 1");
+        par2.setText("Texto de Par 2");
 
         Button mAceptar = (Button) findViewById(R.id.agregar_flashcard);
         Button TerminarSet = (Button) findViewById(R.id.terminar_set);

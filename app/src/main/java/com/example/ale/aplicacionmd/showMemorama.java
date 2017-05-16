@@ -174,4 +174,11 @@ public class showMemorama extends AppCompatActivity
         */
 
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent getBack = new Intent(showMemorama.this, MemoramaActivity.class);
+        showMemorama.this.startActivity(getBack);
+    }
 }

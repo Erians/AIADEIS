@@ -205,4 +205,11 @@ public class flashCardsActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        Intent getBack = new Intent(flashCardsActivity.this, MainActivity.class);
+        flashCardsActivity.this.startActivity(getBack);
+    }
+
 }

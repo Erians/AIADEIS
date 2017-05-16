@@ -21,7 +21,7 @@ public class ComplexRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     private final int card = 0, MF=1, Memo = 2, showMemo = 3;
     private int type=0;
     private String[] titles = {"Flashcards", "Memorama"};
-    private int[] images = {R.drawable.bag_2, R.drawable.bag_1};
+    private int[] images = {R.drawable.bag_3, R.drawable.bag_8};
     private String[] names = {"Set de prueba"};
     private String[] description = {"Crea un nuevo set"};
     private String[] namesM = {"Set de prueba", "Set 5"};

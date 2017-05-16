@@ -32,7 +32,7 @@ public class RecyclerAdapter extends RecyclerView.ViewHolder
             @Override
             public void onClick(View v) {
                 int position = getAdapterPosition();
-                Snackbar.make(v, "Click detected on item" + position, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                //Snackbar.make(v, "Click detected on item" + position, Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
         /*
         se obtiene el contexto y se crea un Intent este "intenta" o trata de abrir otro activity,
