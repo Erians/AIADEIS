@@ -23,8 +23,8 @@
 
     <TextView
         android:id="@+id/aviso_cont"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:textSize="20sp"
         android:text="¿Desea salirse sin guardar cambios?"
         android:textColor="@color/gray"
@@ -38,7 +38,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_gravity="center">
 
@@ -46,10 +46,10 @@
         <Button
             android:id="@+id/no_button"
             android:layout_width="130dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_button"
 
-            android:layout_marginRight="20dp"
-            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentLeft="true"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
             android:background="@color/gray_other"
@@ -59,11 +59,11 @@
         <Button
             android:id="@+id/si_button"
             android:layout_width="130dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/height_button"
             android:layout_marginTop="30dp"
 
-            android:layout_marginLeft="20dp"
-            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentRight="true"
             android:layout_marginBottom="10dp"
             android:background="@color/gray_other"
             android:textColor="@color/negro"
